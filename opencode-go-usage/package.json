@@ -1,0 +1,43 @@
+{
+    "name":  "@local/opencode-go-usage",
+    "version":  "0.3.0",
+    "private":  true,
+    "description":  "Track OpenCode Go subscription usage (5-hour, weekly, monthly) right under the composer in DeepSeek Harness",
+    "type":  "module",
+    "main":  "index.js",
+    "exports":  {
+                    ".":  {
+                              "default":  "./index.js"
+                          },
+                    "./client":  {
+                                     "default":  "./client.js"
+                                 },
+                    "./locale/*.json":  "./locale/*.json",
+                    "./icon":  "./icon.svg"
+                },
+    "icon":  "./icon.svg",
+    "files":  [
+                  "index.js",
+                  "client.js",
+                  "cordis.patch.yml",
+                  "locale/*.json",
+                  "icon.svg",
+                  "README.md",
+                  "INSTALL.md",
+                  "LICENSE"
+              ],
+    "dsh":  {
+                "bundle":  {
+                               "patch":  "./cordis.patch.yml"
+                           },
+                "client":  {
+                               "platform":  "web",
+                               "immediately":  true,
+                               "inject":  [
+                                              "@deepseek-ai/dsh-client-locale",
+                                              "@deepseek-ai/dsh-client-ui-conversation"
+                                          ]
+                           }
+            },
+    "license":  "MIT"
+}

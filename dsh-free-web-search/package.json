@@ -1,0 +1,31 @@
+{
+  "name": "@local/free-web-search",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Free keyless web search (7 fallback backends) and a proxy-friendly fetch provider for DeepSeek Harness",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "default": "./index.js"
+    },
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "icon": "./icon.svg",
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "INSTALL.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "license": "MIT"
+}

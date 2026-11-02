@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Бесплатный веб-поиск",
+    "description": "Веб-поиск без API-ключей (Tavily, Exa, DuckDuckGo) и fetch-провайдер, работающий через прокси с fake-IP, для встроенных инструментов web_search и web_fetch."
+  }
+}

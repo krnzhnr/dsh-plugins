@@ -1,0 +1,13 @@
+# Bundle layer: add the OpenCode Go usage tracker host plugin and its Web UI.
+# Config (all optional):
+#   refreshSeconds: seconds a successful console read stays cached (30..3600)
+#   timeoutMs:      console request deadline in milliseconds (1000..60000)
+#   authFile:       explicit OpenCode auth.json path (default: auto-detect)
+#   providerKey:    auth entry name (default: opencode-go)
+#   apiBase:        console origin (default: https://opencode.ai)
+- insert:
+    - id: opencode-go-usage
+      name: '@local/opencode-go-usage'
+      config:
+        refreshSeconds: 300
+        timeoutMs: 15000

@@ -1,0 +1,13 @@
+# Bundle layer: pin the web seam to this bundle's providers.
+# A Cordis patch replaces the targeted row's whole `config`, so both ids are
+# restated. Remove this bundle to return to the shipped DeepSeek search and
+# the shipped public-IP-only fetch provider.
+- id: web
+  name: '@deepseek-ai/dsh-web'
+  config:
+    searchProvider: free-web
+    fetchProvider: http-fakeip
+
+- insert:
+    - id: free-web
+      name: '@local/free-web-search'
