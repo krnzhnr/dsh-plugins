@@ -1,6 +1,6 @@
 # dsh-plugins
 
-Мои плагины для [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness): русская локализация интерфейса, трекер расхода OpenCode Go, бесплатный веб-поиск без ключей.
+Плагины для [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness): русская локализация интерфейса, трекер расхода OpenCode Go, бесплатный веб-поиск без ключей.
 
 | Плагин | Версия | Что делает |
 |---|---|---|
