@@ -1,6 +1,6 @@
 {
   "name": "@local/dsh-locale-ru",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": true,
   "description": "Russian locale for the DeepSeek Harness interface",
   "type": "module",
