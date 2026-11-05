@@ -1,0 +1,39 @@
+name: install-specs
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: install-specs
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Обновить таблицу спек в README
+        run: node tools/install-specs.cjs ${{ github.repository_owner }} --write-readme
+
+      - name: Закоммитить README, если изменился
+        run: |
+          if git diff --quiet README.md; then
+            echo "README без изменений."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add README.md
+            git commit -m "chore: обновить install-спеки в README [skip ci]"
+            git push
+          fi

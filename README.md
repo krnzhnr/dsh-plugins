@@ -26,17 +26,25 @@ F:\Programing\Utils\dsh-plugins\dsh-locale-ru
 
 ### Вариант 2. Напрямую из GitHub
 
-Plugins → **Add plugin → Install a third-party plugin** → вставить спеку (замените `<ник>`):
+Plugins → **Add plugin → Install a third-party plugin** → вставить спеку из таблицы (копипаста, ник уже подставлен):
+
+<!-- install-specs:start -->
+| Плагин | Версия | Спека (ветка `main`) | Пин на тег |
+|---|---|---|---|
+| `dsh-free-web-search/` | 1.1.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-free-web-search` | — |
+| `dsh-locale-ru/` | 1.3.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-locale-ru` | — |
+| `dsh-mambo-dark/` | 1.1.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-mambo-dark` | — |
+| `dsh-mambo-pet/` | 1.1.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-mambo-pet` | — |
+| `opencode-go-usage/` | 0.3.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/opencode-go-usage` | — |
+<!-- install-specs:end -->
+
+Спеки выше — для `github.com/krnzhnr`. Под чужой форк таблица пересоберётся сама при пуше в `main` (воркфлоу `install-specs`), вручную — так:
 
 ```
-git+https://github.com/<ник>/dsh-plugins.git#main&path:/dsh-locale-ru
+node tools/install-specs.cjs <ник> [--ref ветка] --write-readme
 ```
 
-Хвост `&path:/…` выбирает плагин внутри монорепо:
-`&path:/dsh-locale-ru`, `&path:/opencode-go-usage`, `&path:/dsh-free-web-search`,
-`&path:/dsh-mambo-dark`, `&path:/dsh-mambo-pet`.
-
-Для воспроизводимости вместо `main` лучше указать тег релиза, например `#dsh-locale-ru/v1.1.0`. Нужны git в PATH и доступ к github.com.
+Для воспроизводимости вместо `main` лучше указать пин на тег (правая колонка; тег должен существовать в репо — скрипт сам проверяет `git tag`). Нужны git в PATH и доступ к github.com.
 
 ### После установки
 
