@@ -18,14 +18,21 @@ const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'))
 check('package name is @local/dsh-mambo-pet', pkg.name === '@local/dsh-mambo-pet', pkg.name)
 check('bundle patch points at cordis.patch.yml', pkg?.dsh?.bundle?.patch === './cordis.patch.yml')
 check('host-only bundle (no dsh.client)', pkg?.dsh?.client === undefined)
+check('engine pinned as dependency', pkg?.dependencies?.['@linxin666/dsh-pet'] === '0.4.14',
+  JSON.stringify(pkg?.dependencies))
 
 const patch = readFileSync(join(ROOT, 'cordis.patch.yml'), 'utf8')
 check('patch inserts dsh-mambo-pet row', patch.includes('id: dsh-mambo-pet') && patch.includes('@local/dsh-mambo-pet'))
+check('patch claims no foreign engine row (no install conflicts)', !patch.includes('id: pet\n') && !patch.includes("name: '@linxin666/dsh-pet'"))
 
-for (const rel of ['pets/mambo/pet.json', 'pets/mambo/previews/idle.gif',
+for (const rel of ['pets/mambo/pet.json', 'pets/mambo/voice.json', 'pets/mambo/previews/idle.gif',
   'locale/en.json', 'locale/ru.json', 'icon.svg', 'README.md', 'INSTALL.md', 'LICENSE']) {
   check(`file present: ${rel}`, existsSync(join(ROOT, rel)))
 }
+
+const voiceText = readFileSync(join(ROOT, 'pets/mambo/voice.json'), 'utf8')
+check('voice.json under 64KB scan cap', Buffer.byteLength(voiceText) < 65536, String(Buffer.byteLength(voiceText)))
+check('voice.json has no CJK lines', !/[㐀-䶿一-鿿豈-﫿぀-ヿ가-힯]/.test(voiceText))
 
 const pet = JSON.parse(readFileSync(join(ROOT, 'pets/mambo/pet.json'), 'utf8'))
 check('pet id matches folder', pet.id === PET_ID, String(pet.id))

@@ -9,9 +9,20 @@ The Host half copies the bundled `pets/mambo/` directory into
 startup, so a **DSH restart is required after install** (a page reload is not
 enough); then pick **Mambo** in Settings → Pet.
 
-## Contents (pet v2.2.1)
+## Requirements
+
+The pet engine `@linxin666/dsh-pet` (Pet tab, registry, floating-pet renderer)
+is a declared dependency and installs together with this bundle. If you
+installed this bundle from a local folder and the Pet tab is still missing,
+add the engine manually — Plugins → **Add plugin → Install a third-party
+plugin** with the npm spec `@linxin666/dsh-pet` (same profile, then restart
+DSH).
+
+## Contents (pet v2.2.2, Russian voice included)
 
 - `pets/mambo/pet.json` — pet manifest v2 (`mambo`, `frames2d`, 12 tracks)
+- `pets/mambo/voice.json` — Russian voice pack (all 11 status scenes, 17 tool
+  families, whispers, remarks): Mambo speaks Russian even with no global voice
 - `pets/mambo/frames/` — 671 WebP frames, 300×300 (idle, waiting, thinking,
   tool, review, done, failed, drag + 4 ambient one-shots)
 - `pets/mambo/previews/idle.gif` — catalog preview

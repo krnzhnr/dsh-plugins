@@ -8,6 +8,15 @@ The Host half copies the bundled `skins/mambo-dark/` directory into
 Settings → Appearance (Skin Center) with no manual file moves. Re-installing
 updates the files in place.
 
+## Requirements
+
+The Appearance Center engine `@linxin666/dsh-client-ui-skin-center` (skin
+catalog UI) is a declared dependency and installs together with this bundle.
+If you installed this bundle from a local folder and the Appearance tab is
+still missing, add the engine manually — Plugins → **Add plugin → Install a
+third-party plugin** with the npm spec
+`@linxin666/dsh-client-ui-skin-center` (same profile).
+
 ## Contents
 
 - `skins/mambo-dark/skin.json` — skin manifest v2 (`mambo-dark`, v1.0.0)
