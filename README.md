@@ -1,12 +1,14 @@
 # dsh-plugins
 
-Плагины для [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness): исправления русского перевода интерфейса, трекер расхода OpenCode Go, бесплатный веб-поиск без ключей.
+Плагины для [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness): исправления русского перевода интерфейса, трекер расхода OpenCode Go, бесплатный веб-поиск без ключей, тёмный скин с портретом на фоне и питомец Мамбо.
 
 | Плагин | Версия | Что делает |
 |---|---|---|
 | `dsh-locale-ru/` | 1.2.0 | Русский язык поверх официального: полные словари (~2560 ключей) + 306 точечных правок |
 | `opencode-go-usage/` | 0.3.0 | Пилюля расхода подписки OpenCode Go под полем ввода (5 часов, неделя, месяц) |
 | `dsh-free-web-search/` | 1.1.0 | Веб-поиск без ключей (7 запасных бэкендов) и fetch-провайдер |
+| `dsh-mambo-dark/` | 1.0.0 | Тёмный графитовый скин Мамбо Нуар: портрет 16:10 на фоне, синий акцент (установка в `$DSH_HOME/skins`) |
+| `dsh-mambo-pet/` | 1.0.0 | Питомец Мамбо (`frames2d`, 12 треков, питомец v2.2.1; установка в `$DSH_HOME/pets`, нужен рестарт DSH) |
 
 Лицензия — MIT (см. [LICENSE](./LICENSE)).
 
@@ -31,13 +33,16 @@ git+https://github.com/<ник>/dsh-plugins.git#main&path:/dsh-locale-ru
 ```
 
 Хвост `&path:/…` выбирает плагин внутри монорепо:
-`&path:/dsh-locale-ru`, `&path:/opencode-go-usage`, `&path:/dsh-free-web-search`.
+`&path:/dsh-locale-ru`, `&path:/opencode-go-usage`, `&path:/dsh-free-web-search`,
+`&path:/dsh-mambo-dark`, `&path:/dsh-mambo-pet`.
 
 Для воспроизводимости вместо `main` лучше указать тег релиза, например `#dsh-locale-ru/v1.1.0`. Нужны git в PATH и доступ к github.com.
 
 ### После установки
 
 - Исправления перевода применяются сами (перечитать страницу: `Ctrl+Shift+R`).
+- Скин Мамбо Нуар: применить в Settings → Appearance (Центр оформления).
+- Питомец Мамбо: **перезапустить DSH целиком** (реестр питомцев читается на старте хоста), затем выбрать Мамбо в Settings → Pet.
 
 ### Обновление
 

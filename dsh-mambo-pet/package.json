@@ -1,0 +1,31 @@
+{
+  "name": "@local/dsh-mambo-pet",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mambo pet for DeepSeek Harness: frames2d companion (12 tracks, 671 frames) with looping work animations",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./index.js"
+    },
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "icon": "./icon.svg",
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "pets/**/*",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "INSTALL.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,10 @@
+# Bundle layer: install the Mambo pet files into $DSH_HOME/pets on load.
+# The pet registry scans $DSH_HOME/pets at host startup, so a DSH restart
+# is required after install (a page reload is not enough).
+# Config (all optional):
+#   overwrite: replace existing pet files on re-apply (default true).
+- insert:
+    - id: dsh-mambo-pet
+      name: '@local/dsh-mambo-pet'
+      config:
+        overwrite: true

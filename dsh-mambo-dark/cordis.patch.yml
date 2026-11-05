@@ -1,0 +1,8 @@
+# Bundle layer: install the Mambo Noir skin files into $DSH_HOME/skins on load.
+# Config (all optional):
+#   overwrite: replace existing skin files on re-apply (default true).
+- insert:
+    - id: dsh-mambo-dark
+      name: '@local/dsh-mambo-dark'
+      config:
+        overwrite: true

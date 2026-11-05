@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schemas.linxin666.org/dsh-skin/v2.json",
+  "skinManifestVersion": 2,
+  "id": "mambo-dark",
+  "name": "Мамбо Нуар",
+  "nameEn": "Mambo Noir",
+  "version": "1.0.0",
+  "author": "powerdog996 / DreamSkin · DSH adapter (Noir edition)",
+  "tagline": "Тот же портрет 16:10 · нейтральный чёрный интерфейс оригинального DSH · синий акцент",
+  "description": "Третий стиль коллекции: фон остаётся прежним (портрет Мамбо в кадре 16:10, 1920×1200), а интерфейс собран в палитре оригинального клиента DeepSeek Harness — нейтральный чёрный/графит без перивинклового оттенка. Метки, границы и состояния взяты из официальной темы байт-в-байт; поверхности переведены в чёрное стекло с альфой, чтобы сквозь панели было видно портрет, а акцент/бренд/primary — официальный синий DSH. Слой читаемости L3 (плашки под текстом) сохранён и перекрашен в нейтральный графит; на стартовом экране — плашки под заголовком, бейджем и чипами.",
+  "tags": [
+    "portrait",
+    "16x10",
+    "dark",
+    "graphite",
+    "neutral",
+    "official",
+    "readable"
+  ],
+  "accent": "#4176e6",
+  "order": 3,
+  "preview": {
+    "light": "preview/light.jpg",
+    "dark": "preview/dark.jpg"
+  },
+  "contributes": {
+    "stylesheet": "skin.css",
+    "patches": "patches.css",
+    "backgroundMedia": {
+      "light": {
+        "type": "image",
+        "src": "assets/mambo-art.jpg",
+        "scrim": "radial-gradient(95% 85% at 50% 45%, rgba(250, 250, 250, 0.2) 0%, rgba(248, 248, 248, 0.34) 100%), linear-gradient(180deg, rgba(250, 250, 250, 0.34) 0%, rgba(250, 250, 250, 0.38) 50%, rgba(248, 248, 248, 0.44) 100%)"
+      },
+      "dark": {
+        "type": "image",
+        "src": "assets/mambo-art.jpg",
+        "scrim": "radial-gradient(95% 85% at 50% 46%, rgba(9, 9, 10, 0.42) 0%, rgba(9, 9, 10, 0.1) 100%), linear-gradient(180deg, rgba(6, 6, 7, 0.24) 0%, rgba(8, 8, 9, 0.28) 50%, rgba(10, 10, 11, 0.32) 100%)"
+      }
+    }
+  }
+}

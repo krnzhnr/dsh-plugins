@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Mambo Noir skin">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101014"/>
+      <stop offset="1" stop-color="#1c1c22"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.55">
+      <stop offset="0" stop-color="#8b93b8"/>
+      <stop offset="1" stop-color="#8b93b8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bg)"/>
+  <ellipse cx="32" cy="27" rx="16" ry="19" fill="url(#glow)" opacity="0.55"/>
+  <circle cx="32" cy="24" r="9" fill="#2a2a33" stroke="#4176e6" stroke-width="2.5"/>
+  <path d="M18 52c4-8 9-11 14-11s10 3 14 11" fill="none" stroke="#4176e6" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

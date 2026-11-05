@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Mambo Pet",
+    "description": "Mambo gremlin companion (frames2d, 12 tracks). Installs mambo into $DSH_HOME/pets; restart DSH, then pick Mambo in Settings → Pet."
+  }
+}

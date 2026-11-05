@@ -1,0 +1,31 @@
+{
+  "name": "@local/dsh-mambo-dark",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mambo Noir skin for DeepSeek Harness: portrait 16:10 background with neutral graphite UI and blue accent",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./index.js"
+    },
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "icon": "./icon.svg",
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "skins/**/*",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "INSTALL.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "license": "MIT"
+}
