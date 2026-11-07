@@ -142,11 +142,14 @@ button.ocg_pill:hover,button.ocg_pill[aria-expanded=true]{background:var(--dsw-a
 .ocg_rule{border-top:.5px solid var(--dsw-alias-border-l2);margin-bottom:10px}
 .ocg_header{align-items:center;gap:6px;display:flex;font-variant-numeric:tabular-nums}
 .ocg_percent{color:var(--dsw-alias-label-primary);font-weight:500}
-.ocg_headline{color:var(--dsw-alias-label-tertiary)}
+.ocg_headline{color:var(--dsw-alias-label-tertiary);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ocg_figures{font-variant-numeric:tabular-nums;color:var(--dsw-alias-label-primary);margin-left:auto;font-weight:500}
 .ocg_bar{background:var(--dsw-alias-interactive-bg-hover);border-radius:999px;height:4px;margin:10px 0 12px;overflow:hidden;position:relative}
 .ocg_barFill{height:100%;border-radius:999px;transition:width 240ms ease}
 .ocg_paceTick{position:absolute;top:-1px;bottom:-1px;width:2px;border-radius:1px;background:rgba(255,255,255,.92);box-shadow:0 0 0 .5px rgba(0,0,0,.5);pointer-events:auto}
+.ocg_paceWrap{position:relative;height:21px;margin:-8px 0 7px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
+.ocg_paceCloud{position:absolute;top:0;transform:translateX(-50%);font-size:10px;line-height:14px;padding:5px 7px 2px;background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-secondary);font-variant-numeric:tabular-nums;white-space:nowrap;pointer-events:auto;clip-path:polygon(50% 0%,59% 24%,78% 24%,90% 27%,96% 33%,99% 42%,100% 52%,100% 66%,99% 76%,94% 86%,86% 93%,76% 97%,66% 99%,34% 99%,24% 97%,14% 93%,6% 86%,1% 76%,0% 66%,0% 52%,1% 42%,4% 33%,10% 27%,22% 24%,41% 24%)}
+.ocg_paceCloudOver{color:var(--dsw-alias-state-error-primary)}
 .ocg_rows{margin:0;display:flex;flex-direction:column;gap:6px}
 .ocg_row{margin:0;display:flex;align-items:center;gap:6px;min-width:0}
 .ocg_rowLabel{color:var(--dsw-alias-label-tertiary);align-items:center;gap:6px;min-width:0;display:inline-flex}
@@ -351,8 +354,37 @@ button.ocg_pill:hover,button.ocg_pill[aria-expanded=true]{background:var(--dsw-a
       return { open, setOpen, rootRef, panelRef, pos }
     }
 
+    /** Center each forecast bubble exactly on its tick, clamped in pixels by its
+     * own half width (percent clamping would detach it from the tick, as % knows
+     * nothing about the bubble's pixel width). Runs after paint and on resize. */
+    function useCloudClamp(rowsRef, payload, now) {
+      React.useLayoutEffect(() => {
+        const rows = rowsRef.current
+        if (rows === null || payload === null || payload.ok !== true) return undefined
+        const clamp = () => {
+          rows.querySelectorAll('.ocg_paceCloud').forEach((cloud) => {
+            const wrap = cloud.parentElement
+            const frac = Number(cloud.dataset?.frac)
+            if (wrap === null || !Number.isFinite(frac)) return
+            const wrapW = wrap.clientWidth
+            const cloudW = cloud.offsetWidth
+            if (!(wrapW > 0) || !(cloudW > 0)) return
+            const x = Math.max(0, Math.min(1, frac)) * wrapW
+            const left = Math.max(cloudW / 2, Math.min(wrapW - cloudW / 2, x))
+            cloud.style.left = `${left}px`
+            cloud.style.transform = 'translateX(-50%)'
+          })
+        }
+        clamp()
+        window.addEventListener('resize', clamp)
+        return () => window.removeEventListener('resize', clamp)
+      }, [payload, now])
+    }
+
     /** The header, bar, window rows, and plan footer of the open panel. */
     function PanelBody({ t, payload, now, busy, onRefresh, onRetry }) {
+      const rowsRef = React.useRef(null)
+      useCloudClamp(rowsRef, payload, now)
       if (payload === null) {
         return h('div', { className: 'ocg_loading' }, t('panel.loading'))
       }
@@ -427,7 +459,7 @@ button.ocg_pill:hover,button.ocg_pill[aria-expanded=true]{background:var(--dsw-a
         null,
         h(
           'div',
-          { className: 'ocg_rows' },
+          { className: 'ocg_rows', ref: rowsRef },
           WINDOWS.map((window) => {
             const rowMeter = snapshot.meters[window.key]
             const rowPercent = Math.max(0, Math.min(100, Number(rowMeter?.percent) || 0))
@@ -437,6 +469,7 @@ button.ocg_pill:hover,button.ocg_pill[aria-expanded=true]{background:var(--dsw-a
             const paceStart = window.key === 'month' ? snapshot.subscribedAt : rowMeter?.startsAt
             const paceEnd = window.key === 'month' ? snapshot.periodEndsAt : rowMeter?.resetsAt
             let paceTick = null
+            let paceCloud = null
             const paceS = Date.parse(paceStart)
             const paceE = Date.parse(paceEnd)
             if (Number.isFinite(paceS) && Number.isFinite(paceE) && paceE > paceS) {
@@ -446,11 +479,32 @@ button.ocg_pill:hover,button.ocg_pill[aria-expanded=true]{background:var(--dsw-a
                 if (paceFrac > 0) {
                   const paceRaw = Math.max(0, Number(rowMeter?.percent) || 0) / paceFrac
                   const paceClamped = Math.max(0, Math.min(100, paceRaw))
+                  const paceLabel = `${Math.round(paceRaw)}%`
+                  const paceHint = t('panel.pace', { percent: Math.round(paceRaw) })
+                  // Риска на баре отмечает точную позицию прогноза; облачко снизу
+                  // всегда показывает его процент. Облачко — один элемент без
+                  // псевдо: силуэт с хвостиком вырезан clip-path из сплошной
+                  // заливки, стыка нет в принципе. Точное центрирование по риске
+                  // делает useCloudClamp в пикселях (см. выше).
                   paceTick = h('div', {
                     className: 'ocg_paceTick',
                     style: { left: `calc(${paceClamped}% - 1px)` },
-                    title: t('panel.pace', { percent: Math.round(paceRaw) }),
+                    title: paceHint,
                   })
+                  paceCloud = h(
+                    'div',
+                    { className: 'ocg_paceWrap', 'aria-hidden': true },
+                    h(
+                      'span',
+                      {
+                        className: `ocg_paceCloud${paceRaw >= 100 ? ' ocg_paceCloudOver' : ''}`,
+                        style: { left: `${paceClamped}%` },
+                        'data-frac': paceClamped / 100,
+                        title: paceHint,
+                      },
+                      paceLabel,
+                    ),
+                  )
                 }
               }
             }
@@ -467,7 +521,16 @@ button.ocg_pill:hover,button.ocg_pill[aria-expanded=true]{background:var(--dsw-a
                       : '',
                 },
                 h('span', { className: 'ocg_percent' }, `${Math.round(rowPercent)}%`),
-                h('span', { className: 'ocg_headline' }, t('panel.ofLimit', { window: t(window.short) })),
+                h(
+                  'span',
+                  { className: 'ocg_headline' },
+                  [
+                    t('panel.ofLimit', { window: t(window.short) }),
+                    rowReset !== null && rowReset > 0 ? formatDuration(rowReset) : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' · '),
+                ),
                 h(
                   'span',
                   { className: 'ocg_figures' },
@@ -490,6 +553,7 @@ button.ocg_pill:hover,button.ocg_pill[aria-expanded=true]{background:var(--dsw-a
                 }),
                 paceTick,
               ),
+              paceCloud,
             )
           }),
         ),

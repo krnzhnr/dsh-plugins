@@ -23,7 +23,9 @@ context-usage meter:
   outside click or Escape) with:
   - the nearest window's percentage, dollar figures (`$1.75 / $12`), and a
     progress bar,
-  - a row per window with its amount, limit, and percentage,
+  - a row per window with its amount, limit, percentage, and reset countdown,
+  - a forecast tick on each bar with a small cloud below showing the projected
+    end-of-window percent (red when the pace points at or past 100%),
   - the plan state (renewal date or "cancelled, active until …", Extra Usage),
   - the nearest reset countdown, the last-refresh time, and a refresh button.
 
