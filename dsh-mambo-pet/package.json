@@ -1,10 +1,10 @@
 {
   "name": "@local/dsh-mambo-pet",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
-  "description": "Mambo pet for DeepSeek Harness: frames2d companion (12 tracks, 671 frames) with looping work animations",
+  "description": "Mambo pet for DeepSeek Harness: frames2d companion (8 tracks, 421 frames, stock 0.4.16 compatible)",
   "dependencies": {
-    "@linxin666/dsh-pet": "0.4.14"
+    "@linxin666/dsh-pet": "0.4.16"
   },
   "type": "module",
   "exports": {

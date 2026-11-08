@@ -18,7 +18,7 @@ const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'))
 check('package name is @local/dsh-mambo-dark', pkg.name === '@local/dsh-mambo-dark', pkg.name)
 check('bundle patch points at cordis.patch.yml', pkg?.dsh?.bundle?.patch === './cordis.patch.yml')
 check('host-only bundle (no dsh.client)', pkg?.dsh?.client === undefined)
-check('engine pinned as dependency', pkg?.dependencies?.['@linxin666/dsh-client-ui-skin-center'] === '0.4.14',
+check('engine pinned as dependency', pkg?.dependencies?.['@linxin666/dsh-client-ui-skin-center'] === '0.4.16',
   JSON.stringify(pkg?.dependencies))
 
 const patch = readFileSync(join(ROOT, 'cordis.patch.yml'), 'utf8')

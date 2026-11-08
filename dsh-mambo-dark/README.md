@@ -10,8 +10,9 @@ updates the files in place.
 
 ## Requirements
 
-The Appearance Center engine `@linxin666/dsh-client-ui-skin-center` (skin
-catalog UI) is a declared dependency and installs together with this bundle.
+The Appearance Center engine `@linxin666/dsh-client-ui-skin-center` **0.4.16**
+(skin catalog UI) is a declared dependency and installs together with this
+bundle (verified with DSH 0.4.16).
 If you installed this bundle from a local folder and the Appearance tab is
 still missing, add the engine manually — Plugins → **Add plugin → Install a
 third-party plugin** with the npm spec
@@ -19,7 +20,7 @@ third-party plugin** with the npm spec
 
 ## Contents
 
-- `skins/mambo-dark/skin.json` — skin manifest v2 (`mambo-dark`, v1.0.0)
+- `skins/mambo-dark/skin.json` — skin manifest v2 (`mambo-dark`, v1.1.0)
 - `skins/mambo-dark/skin.css` — interface tokens in the stock DSH palette
 - `skins/mambo-dark/patches.css` — background layer, scrim and L3 readability
 - `skins/mambo-dark/assets/mambo-art.jpg` — portrait background (1920×1200)
@@ -35,6 +36,11 @@ All fields are optional; edit the row config in `cordis.patch.yml`:
 
 After install, apply the skin in Settings → Appearance → **Mambo Noir**.
 A page reload may be needed for the background to appear.
+
+## Changelog
+
+- 1.2.0 — совместимость с DSH 0.4.16 / @linxin666 0.4.16 (skin manifest v1.1.0).
+- 1.1.0 — первый пакетный релиз скина Мамбо Нуар.
 
 ## License
 

@@ -16,9 +16,10 @@ const check = (name, ok, detail = '') => {
 
 const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'))
 check('package name is @local/dsh-mambo-pet', pkg.name === '@local/dsh-mambo-pet', pkg.name)
+check('package version is 1.2.0', pkg.version === '1.2.0', pkg.version)
 check('bundle patch points at cordis.patch.yml', pkg?.dsh?.bundle?.patch === './cordis.patch.yml')
 check('host-only bundle (no dsh.client)', pkg?.dsh?.client === undefined)
-check('engine pinned as dependency', pkg?.dependencies?.['@linxin666/dsh-pet'] === '0.4.14',
+check('engine pinned as dependency', pkg?.dependencies?.['@linxin666/dsh-pet'] === '0.4.16',
   JSON.stringify(pkg?.dependencies))
 
 const patch = readFileSync(join(ROOT, 'cordis.patch.yml'), 'utf8')
@@ -36,9 +37,21 @@ check('voice.json has no CJK lines', !/[㐀-䶿一-鿿豈-﫿぀-ヿ가-힯]/.te
 
 const pet = JSON.parse(readFileSync(join(ROOT, 'pets/mambo/pet.json'), 'utf8'))
 check('pet id matches folder', pet.id === PET_ID, String(pet.id))
+check('pet manifest version is 2.3.0', pet.version === '2.3.0', String(pet.version))
 check('pet renderer is frames2d', pet.renderer === 'frames2d', String(pet.renderer))
-check('pet has 12 tracks', Object.keys(pet.frames2d.tracks).length === 12,
+check('pet has 8 tracks', Object.keys(pet.frames2d.tracks).length === 8,
   String(Object.keys(pet.frames2d.tracks).length))
+// Stock @linxin666/dsh-pet 0.4.16 caps a frames2d track at 64 frames.
+const TRACK_CAP = 64
+check('idle track has exactly 64 frames (stock cap)',
+  pet.frames2d.tracks.idle?.frames?.length === TRACK_CAP,
+  String(pet.frames2d.tracks.idle?.frames?.length))
+for (const [track, def] of Object.entries(pet.frames2d.tracks)) {
+  check(`track ${track} fits the stock ${TRACK_CAP}-frame cap`,
+    Array.isArray(def.frames) && def.frames.length <= TRACK_CAP, String(def.frames?.length))
+}
+check('no ambient-* tracks (stock renderer never plays them)',
+  !Object.keys(pet.frames2d.tracks).some((t) => t.startsWith('ambient-')))
 check('review loops (streaming fix)', pet.frames2d.tracks.review?.loop === true &&
   pet.frames2d.tracks.review?.fallback === undefined)
 for (const track of ['waiting', 'thinking', 'tool', 'review']) {
@@ -58,7 +71,7 @@ const walk = (dir) => {
   }
 }
 walk(join(ROOT, 'pets/mambo/frames'))
-check('frames directory is populated (600+ files)', frameCount >= 600, String(frameCount))
+check('frames directory holds the 421 shipped frames', frameCount === 421, String(frameCount))
 for (const track of Object.keys(pet.frames2d.tracks)) {
   const missing = pet.frames2d.tracks[track].frames.filter((f) => !existsSync(join(ROOT, 'pets/mambo/frames', track, f)))
   check(`all ${track} frames present`, missing.length === 0, missing.slice(0, 3).join(','))
@@ -70,7 +83,7 @@ check('overwrite defaults to true', resolveOptions({}).overwrite === true)
 const sandbox = mkdtempSync(join(tmpdir(), 'mambo-pet-'))
 try {
   const first = installPet({ packageDir: ROOT, homeDir: sandbox, overwrite: true })
-  check('install copies pet files', first.copied >= 670, JSON.stringify({ copied: first.copied, skipped: first.skipped }))
+  check('install copies pet files', first.copied >= 424, JSON.stringify({ copied: first.copied, skipped: first.skipped }))
   check('install target is pets/mambo', first.dest === join(sandbox, 'pets', PET_ID))
   const second = installPet({ packageDir: ROOT, homeDir: sandbox, overwrite: false })
   check('second install skips existing files', second.copied === 0 && second.skipped === first.copied,

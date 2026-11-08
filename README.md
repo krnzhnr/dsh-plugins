@@ -7,8 +7,8 @@
 | `dsh-locale-ru/` | 1.3.0 | Отдельный язык «Русский исправленный»: полные словари + 30 фиксов, fallback на официальный |
 | `opencode-go-usage/` | 0.3.0 | Пилюля расхода подписки OpenCode Go под полем ввода (5 часов, неделя, месяц) |
 | `dsh-free-web-search/` | 1.1.0 | Веб-поиск без ключей (7 запасных бэкендов) и fetch-провайдер |
-| `dsh-mambo-dark/` | 1.1.0 | Тёмный графитовый скин Мамбо Нуар: портрет 16:10 на фоне, синий акцент; движок центра оформления в зависимостях |
-| `dsh-mambo-pet/` | 1.1.0 | Питомец Мамбо (`frames2d`, 12 треков, питомец v2.2.2 с русской озвучкой; движок питомцев в зависимостях, нужен рестарт DSH) |
+| `dsh-mambo-dark/` | 1.2.0 | Тёмный графитовый скин Мамбо Нуар: портрет 16:10 на фоне, синий акцент; движок центра оформления 0.4.16 в зависимостях |
+| `dsh-mambo-pet/` | 1.2.0 | Питомец Мамбо (`frames2d`, 8 треков, pet v2.3.0: idle 64 кадра — stock-совместимо, русская озвучка; движок питомцев 0.4.16 в зависимостях, нужен рестарт DSH) |
 
 Лицензия — MIT (см. [LICENSE](./LICENSE)).
 
@@ -33,8 +33,8 @@ Plugins → **Add plugin → Install a third-party plugin** → вставить
 |---|---|---|---|
 | `dsh-free-web-search/` | 1.1.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-free-web-search` | — |
 | `dsh-locale-ru/` | 1.3.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-locale-ru` | — |
-| `dsh-mambo-dark/` | 1.1.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-mambo-dark` | — |
-| `dsh-mambo-pet/` | 1.1.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-mambo-pet` | — |
+| `dsh-mambo-dark/` | 1.2.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-mambo-dark` | — |
+| `dsh-mambo-pet/` | 1.2.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-mambo-pet` | — |
 | `opencode-go-usage/` | 0.3.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/opencode-go-usage` | — |
 <!-- install-specs:end -->
 
