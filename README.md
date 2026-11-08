@@ -33,8 +33,8 @@ Plugins → **Add plugin → Install a third-party plugin** → вставить
 |---|---|---|---|
 | `dsh-free-web-search/` | 1.1.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-free-web-search` | — |
 | `dsh-locale-ru/` | 1.3.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-locale-ru` | — |
-| `dsh-mambo-dark/` | 1.2.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-mambo-dark` | — |
-| `dsh-mambo-pet/` | 1.2.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-mambo-pet` | — |
+| `dsh-mambo-dark/` | 1.2.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-mambo-dark` | `git+https://github.com/krnzhnr/dsh-plugins.git#dsh-mambo-dark/v1.2.0&path:/dsh-mambo-dark` |
+| `dsh-mambo-pet/` | 1.2.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/dsh-mambo-pet` | `git+https://github.com/krnzhnr/dsh-plugins.git#dsh-mambo-pet/v1.2.0&path:/dsh-mambo-pet` |
 | `opencode-go-usage/` | 0.3.0 | `git+https://github.com/krnzhnr/dsh-plugins.git#main&path:/opencode-go-usage` | — |
 <!-- install-specs:end -->
 
